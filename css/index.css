@@ -1,0 +1,30 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    height: 100%;
+}
+
+.navbar-center {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: auto;
+    padding-top: 13px;
+}
+
+.showtrips {
+    padding-right: 15px;
+}
+
+.showtripslabel {
+    padding-right: 4px;
+}
+
+.showtripslabeltext {
+    font-weight: normal;
+}
