@@ -18,7 +18,6 @@ function geocodeTripAddress(geocoder, resultsMap, destination, name, leave, back
     var address = destination;
     geocoder.geocode({'address': address}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
-//            resultsMap.setCenter(results[0].geometry.location);
             var pinColour = "008177";
             var tripMarkerIcon = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColour);
             var tripMarker = new google.maps.Marker({
@@ -62,31 +61,24 @@ function geocodeSOSAddress(geocoder, map, coords, callback) {
     console.log("reverse geocode");
 //    reverse geocode lat/lon coords to give rough location on sos marker.
     var address = coords;
-    console.log("1");
     geocoder.geocode({'location': coords}, function(results, status) {
-        console.log("2");
         if (status === google.maps.GeocoderStatus.OK) {
             console.log(status);
             console.log(google.maps.GeocoderStatus.OK);
-            console.log("3");
             if (results[1]) {
-                console.log("4");
                 sosLocation = results[1].formatted_address;
-                console.log("5");
                 console.log("Location: " + sosLocation);
                 callback(sosLocation);
             } else {
-                console.log("6a");
                 window.alert("No results found.");
             }
         } else {
-            console.log("6b");
             window.alert("Geocoder failed due to: " + status);
         }
     });
 }
 
-function placeSOSMarker(lat, lon, map, fullname){
+function placeSOSMarker(lat, lon, map, fullname, timestring){
     var sosLocation = ""; //set location to blank var before reverse geocode
     console.log(sosLocation);
     var lat = parseFloat(lat);
@@ -95,6 +87,7 @@ function placeSOSMarker(lat, lon, map, fullname){
     console.log("lon: " + lon);
     var coords = {lat: lat, lng: lon};
     var name = fullname;
+    var sosDate = timestring;
     var geocoder = new google.maps.Geocoder();
     geocodeSOSAddress(geocoder, map, coords, function(sosLocation){
         console.log("SOS Loc: " + sosLocation);
@@ -107,7 +100,7 @@ function placeSOSMarker(lat, lon, map, fullname){
             title: name + " : " + sosLocation,
             animation: google.maps.Animation.BOUNCE //BOUNCE, DROP
         });
-        var contentString = '<h3><center>SOS Details</center></h3><hr>' + '<p><b>Name: </b>' + name + '</p>';
+        var contentString = '<h3><center>SOS Details</center></h3><hr>' + '<p><b>Name: </b>' + name + '</p>' + '<p><b>Raised: </b>' + sosDate + '</p>';
         sosMarker.info = new google.maps.InfoWindow({
             content: contentString,
         });
@@ -166,13 +159,16 @@ function plotSOS() {
         console.log(sos);
         var lat = sos.lat;
         var lon = sos.lon;
+        var timestamp = sos.timestamp;
+        console.log("Timestamp: " + timestamp);
+        var timestampconverted = new Date(timestamp * 1000);
+        var timestring = timestampconverted.toGMTString();
+        console.log("date: " + timestring);
         var name = sos.name;
         var lastname = sos.lastname;
         var fullname = name + " " + lastname;
-        placeSOSMarker(lat, lon, map, fullname, geocodeSOSAddress);
+        placeSOSMarker(lat, lon, map, fullname, timestring, geocodeSOSAddress);
     });
-    //listen for additions
-    //if found, create marker (red) with flashing alert
 }
 
 function toggleViewTrips() {
