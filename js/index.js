@@ -1,5 +1,27 @@
+////////// DIALOG \\\\\\\\\\
+$(function() {
+    $( "#dialogSOSDismiss" ).dialog({
+        autoOpen: false,
+        modal: true,
+        dialogClass: "dlg-no-close",
+        buttons: {
+            "Confirm": function() {
+                $( this ).dialog( "close" );
+                console.log("YES");
+            },
+            "Cancel": function() {
+                $( this ).dialog( "close" );
+                console.log("NO");
+            }
+        }
+    });
+});
+
+
+
+
+////////// MAIN CODE \\\\\\\\\\
 var map;
-//var sosLocation;
 var viewTrips = true;
 var tripMarkers = []; //CREATES ARRAY FOR TRIP MARKERS
 window.onload = plotTrips();
@@ -100,7 +122,7 @@ function placeSOSMarker(lat, lon, map, fullname, timestring){
             title: name + " : " + sosLocation,
             animation: google.maps.Animation.BOUNCE //BOUNCE, DROP
         });
-        var contentString = '<h3><center>SOS Details</center></h3><hr>' + '<p><b>Name: </b>' + name + '</p>' + '<p><b>Email: </b>' + "EMAIL" + '</p>' + '<p><b>Location: </b>' + sosLocation + '</p>' + '<p><b>Raised: </b>' + sosDate + '</p>' + '<button class="buttonSOSDismiss"  type="button">Dismiss SOS</button>';
+        var contentString = '<h3><center>SOS Details</center></h3><hr>' + '<p><b>Name: </b>' + name + '</p>' + '<p><b>Email: </b>' + "EMAIL" + '</p>' + '<p><b>Location: </b>' + sosLocation + '</p>' + '<p><b>Raised: </b>' + sosDate + '</p>' + '<button class="buttonSOSDismiss"  type="button" onclick="dialogDismissSOS()">Dismiss SOS</button>';
         sosMarker.info = new google.maps.InfoWindow({
             content: contentString,
         });
@@ -184,4 +206,9 @@ function toggleViewTrips() {
         plotTrips();
         console.log("Trips enabled");
     }
+}
+
+function dialogDismissSOS() {
+    console.log("opening dialog");
+    $("#dialogSOSDismiss").dialog("open");
 }
