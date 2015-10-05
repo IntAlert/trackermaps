@@ -8,7 +8,7 @@ $(function() {
             "Confirm": function() {
                 $( this ).dialog( "close" );
                 console.log("YES");
-                //remove Trip
+//                dismissSOS();
             },
             "Cancel": function() {
                 $( this ).dialog( "close" );
@@ -198,8 +198,16 @@ function toggleViewTrips() {
     }
 }
 
-function removeTrip() {
+function dismissSOS() {
     //LATER ON THIS WILL MOVE SOS RECORDS FROM ACTIVE TABLE TO ARCHIVE
+    
+    //CONNECT TO FIREBASE
+    //PASS KEY INTO FIREBASE
+    //COPY DATA INTO LOCAL VARS
+    //CREATE NEW RECORD IN SOSARCHIVE TABLE
+    //FILL IN RECORD IN SOSARCHIVE
+    //ONCE DONE, DELETE OLD RECORD
+    //REMOVE MARKER
 }
 
 function dialogDismissSOS() {
