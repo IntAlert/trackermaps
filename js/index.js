@@ -17,9 +17,6 @@ $(function() {
     });
 });
 
-
-
-
 ////////// MAIN CODE \\\\\\\\\\
 var map;
 var viewTrips = true;
@@ -56,8 +53,6 @@ function geocodeTripAddress(geocoder, resultsMap, destination, name, leave, back
             });
             tripMarker.info.opened = false;
             tripMarker.addListener('click', function() {
-                console.log("open? " + tripMarker.info.opened);
-                console.log("closed? " + tripMarker.info.closed);
                 if(tripMarker.info.opened) {
                     tripMarker.info.close();
                     tripMarker.info.opened = false;
@@ -128,8 +123,6 @@ function placeSOSMarker(lat, lon, map, fullname, timestring){
         });
         sosMarker.info.opened = false;
         sosMarker.addListener('click', function() {
-            console.log("open? " + sosMarker.info.opened);
-            console.log("closed? " + sosMarker.info.closed);
             if(sosMarker.info.opened) {
                 sosMarker.info.close();
                 sosMarker.info.opened = false;
@@ -178,14 +171,11 @@ function plotSOS() {
     ref.on('child_added', function(snapshot){
         var geocoder = new google.maps.Geocoder(); //NEEDED??
         var sos = snapshot.val();
-        console.log(sos);
         var lat = sos.lat;
         var lon = sos.lon;
         var timestamp = sos.timestamp;
-        console.log("Timestamp: " + timestamp);
         var timestampconverted = new Date(timestamp * 1000);
         var timestring = timestampconverted.toGMTString();
-        console.log("date: " + timestring);
         var name = sos.name;
         var lastname = sos.lastname;
         var fullname = name + " " + lastname;
@@ -194,7 +184,6 @@ function plotSOS() {
 }
 
 function toggleViewTrips() {
-    console.log("toggleviewtrips");
     if(viewTrips == true) {
         viewTrips = false;
         console.log("Trips disabled");
