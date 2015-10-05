@@ -76,7 +76,6 @@ function geocodeTripAddress(geocoder, resultsMap, destination, name, leave, back
 }
 
 function geocodeSOSAddress(geocoder, map, coords, callback) {
-    console.log("reverse geocode");
 //    reverse geocode lat/lon coords to give rough location on sos marker.
     var address = coords;
     geocoder.geocode({'location': coords}, function(results, status) {
@@ -143,9 +142,7 @@ function placeSOSMarker(lat, lon, map, fullname, timestring){
 }
 
 function plotTrips() {
-    //connect to firebase trips table
     var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
-    //retrieve trips snapshot
     ref.on('child_added', function(snapshot){
         var geocoder = new google.maps.Geocoder();
         var trip = snapshot.val();
@@ -161,8 +158,6 @@ function plotTrips() {
         //feed countries into geocoder
         geocodeTripAddress(geocoder, map, destination, name, leave, back, contact);
     });
-    //plot markers based on results from geocoder
-    //feed additional information into marker pop-up
 }
 
 function plotSOS() {
