@@ -8,7 +8,7 @@ $(function() {
             "Confirm": function() {
                 $( this ).dialog( "close" );
                 console.log("YES");
-//                dismissSOS();
+                dismissSOS();
             },
             "Cancel": function() {
                 $( this ).dialog( "close" );
