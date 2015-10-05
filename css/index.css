@@ -28,3 +28,8 @@ html, body {
 .showtripslabeltext {
     font-weight: normal;
 }
+
+.buttonSOSDismiss {
+    margin: 0 auto;
+    display: block;
+}
