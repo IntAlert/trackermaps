@@ -8,6 +8,7 @@ $(function() {
             "Confirm": function() {
                 $( this ).dialog( "close" );
                 console.log("YES");
+                //remove Trip
             },
             "Cancel": function() {
                 $( this ).dialog( "close" );
@@ -195,6 +196,10 @@ function toggleViewTrips() {
         plotTrips();
         console.log("Trips enabled");
     }
+}
+
+function removeTrip() {
+    //LATER ON THIS WILL MOVE SOS RECORDS FROM ACTIVE TABLE TO ARCHIVE
 }
 
 function dialogDismissSOS() {
