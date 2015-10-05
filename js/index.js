@@ -100,7 +100,7 @@ function placeSOSMarker(lat, lon, map, fullname, timestring){
             title: name + " : " + sosLocation,
             animation: google.maps.Animation.BOUNCE //BOUNCE, DROP
         });
-        var contentString = '<h3><center>SOS Details</center></h3><hr>' + '<p><b>Name: </b>' + name + '</p>' + '<p><b>Raised: </b>' + sosDate + '</p>';
+        var contentString = '<h3><center>SOS Details</center></h3><hr>' + '<p><b>Name: </b>' + name + '</p>' + '<p><b>Location: </b>' + sosLocation + '</p>' + '<p><b>Raised: </b>' + sosDate + '</p>';
         sosMarker.info = new google.maps.InfoWindow({
             content: contentString,
         });
