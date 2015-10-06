@@ -213,3 +213,18 @@ function dialogDismissSOS() {
     console.log("opening dialog");
     $("#dialogSOSDismiss").dialog("open");
 }
+
+function loginInit() {
+    //SHOW DIALOG WITH LOGIN FIELDS
+    //ON SUBMIT, RUN LOGIN SUBMIT(USER, PASS)
+}
+
+function loginSubmit(USER, PASS) {
+    //VALIDATE LOGIN INFORMATION
+    //IF SUCCESSFUL {
+        //LOAD MARKERS
+    //} ELSE {
+        //FAILURE MESSAGE
+        //DONT LOAD MARKERS
+    //}
+}
