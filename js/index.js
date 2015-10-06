@@ -197,12 +197,16 @@ function dismissSOS() {
     //LATER ON THIS WILL MOVE SOS RECORDS FROM ACTIVE TABLE TO ARCHIVE
     
     //CONNECT TO FIREBASE
+//    var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/sos");
     //PASS KEY INTO FIREBASE
+//    ref.orderByKey().on('child_added', function(snapshot){
+        
     //COPY DATA INTO LOCAL VARS
     //CREATE NEW RECORD IN SOSARCHIVE TABLE
     //FILL IN RECORD IN SOSARCHIVE
     //ONCE DONE, DELETE OLD RECORD
     //REMOVE MARKER
+//    }
 }
 
 function dialogDismissSOS() {
