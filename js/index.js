@@ -6,8 +6,9 @@ $(function() {
         modal: true,
         buttons: {
             "Login": function() {
-                //LOGIN();
-                $( this ).dialog( "close" );
+                var username = document.loginform.username.value;
+                var password = document.loginform.password.value;
+                login(username, password);
             }
         }
     });
