@@ -1,5 +1,19 @@
 ////////// DIALOG \\\\\\\\\\
 $(function() {
+    $( "#dialogLogin" ).dialog({
+        autoOpen: true,
+        width: 400,
+        modal: true,
+        buttons: {
+            "Login": function() {
+                //LOGIN();
+                $( this ).dialog( "close" );
+            }
+        }
+    });
+});
+
+$(function() {
     $( "#dialogSOSDismiss" ).dialog({
         autoOpen: false,
         modal: true,

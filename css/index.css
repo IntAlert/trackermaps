@@ -33,3 +33,11 @@ html, body {
     margin: 0 auto;
     display: block;
 }
+
+.loginText {
+    float: left;
+}
+
+.loginField {
+    float: right;
+}
