@@ -201,7 +201,8 @@ function dismissSOS() {
 //    ref.orderByKey().on('child_added', function(snapshot) {
     //    if(dismissed === false) {
         //    dismiss = true;
-        //    marker.remove();
+        //    sosMarkers.setMap(null);
+        //    sosMarkers = [];
 //    }
 }
 
