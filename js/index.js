@@ -140,7 +140,12 @@ function placeSOSMarker(lat, lon, map, fullname, timestring, sosKey){
             title: name + " : " + sosLocation,
             animation: google.maps.Animation.BOUNCE //BOUNCE, DROP
         });
-        var contentString = '<h3><center>SOS Details</center></h3><hr>' + '<p><b>Name: </b>' + name + '</p>' + '<p><b>Email: </b>' + "EMAIL" + '</p>' + '<p><b>Location: </b>' + sosLocation + '</p>' + '<p><b>Raised: </b>' + sosDate + '</p>' + '<button class="buttonSOSDismiss"  type="button" onclick="dialogDismissSOS(sosKey)">Dismiss SOS</button>';
+        var contentString = '<h3><center>SOS Details</center></h3><hr>' + 
+            '<p><b>Name: </b>' + name + '</p>' + 
+            '<p><b>Email: </b>' + "EMAIL" + '</p>' + 
+            '<p><b>Location: </b>' + sosLocation + '</p>' + 
+            '<p><b>Raised: </b>' + sosDate + '</p>' + 
+            '<button class="buttonSOSDismiss"  type="button" onclick="dialogDismissSOS(' + sosKey + ')">Dismiss SOS</button>';
         sosMarker.info = new google.maps.InfoWindow({
             content: contentString,
         });
@@ -187,6 +192,7 @@ function plotSOS() {
     //connect to firebase sos table
     var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/sos");
     //retrieve sos snapshot
+    //IF DISMISSED IS TRUE, IGNORE THAT RECORD
     ref.on('child_added', function(snapshot){
         var geocoder = new google.maps.Geocoder(); //NEEDED??
         var sos = snapshot.val();
@@ -219,6 +225,7 @@ function toggleViewTrips() {
 }
 
 function dismissSOS(sosKey) {
+    console.log("dismissSOS()");
     var key = sosKey;
     //CONNECT TO FIREBASE
     var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/sos");
