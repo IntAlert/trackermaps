@@ -38,8 +38,6 @@ var map;
 var viewTrips = true;
 var tripMarkers = []; //CREATES ARRAY FOR TRIP MARKERS
 var sosMarkers = []; //CREATES ARRAY FOR SOS MARKERS
-//window.onload = plotTrips();
-//window.onload = plotSOS();
 
 function initMap() {    
     map = new google.maps.Map(document.getElementById('map'), {
