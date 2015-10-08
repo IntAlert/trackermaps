@@ -1,6 +1,10 @@
 ////////// DIALOG \\\\\\\\\\
 $(function() {
     $( "#dialogLogin" ).dialog({
+        closeOnEscape: false,
+        open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog | ui).hide(); },
+        draggable: false,
+        resizable: false,
         autoOpen: true,
         width: 400,
         modal: true,
@@ -16,6 +20,8 @@ $(function() {
 
 $(function() {
     $( "#dialogSOSDismiss" ).dialog({
+        draggable: false,
+        resizable: false,
         autoOpen: false,
         modal: true,
         dialogClass: "dlg-no-close",
@@ -44,6 +50,10 @@ function initMap() {
         mapTypeId: google.maps.MapTypeId.HYBRID, //ROADMAP, SATELLITE, HYBRID, TERRAIN
         disableDefaultUI: true
     });
+}
+
+function dialogDismissSOS() {
+    $("#dialogSOSDismiss").dialog("open");
 }
 
 function geocodeTripAddress(geocoder, resultsMap, destination, name, leave, back, contact) {
@@ -205,33 +215,14 @@ function toggleViewTrips() {
     }
 }
 
-function dismissSOS() {    
+function dismissSOS() {
     //CONNECT TO FIREBASE
 //    var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/sos");
     //PASS KEY INTO FIREBASE
 //    ref.orderByKey().on('child_added', function(snapshot) {
-    //    if(dismissed === false) {
+//        if(ref.dismissed === false) {
         //    dismiss = true;
         //    sosMarkers.setMap(null);
         //    sosMarkers = [];
 //    }
-}
-
-function dialogDismissSOS() {
-    $("#dialogSOSDismiss").dialog("open");
-}
-
-function loginInit() {
-    //SHOW DIALOG WITH LOGIN FIELDS
-    //ON SUBMIT, RUN LOGIN SUBMIT(USER, PASS)
-}
-
-function loginSubmit(USER, PASS) {
-    //VALIDATE LOGIN INFORMATION
-    //IF SUCCESSFUL {
-        //LOAD MARKERS
-    //} ELSE {
-        //FAILURE MESSAGE
-        //DONT LOAD MARKERS
-    //}
 }
