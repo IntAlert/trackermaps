@@ -117,9 +117,10 @@ function geocodeSOSAddress(geocoder, map, coords, callback) {
     });
 }
 
-function placeSOSMarker(lat, lon, map, fullname, timestring){
+function placeSOSMarker(lat, lon, map, fullname, timestring, sosKey){
     var sosLocation = ""; //set location to blank var before reverse geocode
     console.log(sosLocation);
+    var sosKey = sosKey;
     var lat = parseFloat(lat);
     console.log("lat: " + lat);
     var lon = parseFloat(lon);
@@ -139,7 +140,7 @@ function placeSOSMarker(lat, lon, map, fullname, timestring){
             title: name + " : " + sosLocation,
             animation: google.maps.Animation.BOUNCE //BOUNCE, DROP
         });
-        var contentString = '<h3><center>SOS Details</center></h3><hr>' + '<p><b>Name: </b>' + name + '</p>' + '<p><b>Email: </b>' + "EMAIL" + '</p>' + '<p><b>Location: </b>' + sosLocation + '</p>' + '<p><b>Raised: </b>' + sosDate + '</p>' + '<button class="buttonSOSDismiss"  type="button" onclick="dialogDismissSOS()">Dismiss SOS</button>';
+        var contentString = '<h3><center>SOS Details</center></h3><hr>' + '<p><b>Name: </b>' + name + '</p>' + '<p><b>Email: </b>' + "EMAIL" + '</p>' + '<p><b>Location: </b>' + sosLocation + '</p>' + '<p><b>Raised: </b>' + sosDate + '</p>' + '<button class="buttonSOSDismiss"  type="button" onclick="dialogDismissSOS(sosKey)">Dismiss SOS</button>';
         sosMarker.info = new google.maps.InfoWindow({
             content: contentString,
         });
@@ -189,6 +190,8 @@ function plotSOS() {
     ref.on('child_added', function(snapshot){
         var geocoder = new google.maps.Geocoder(); //NEEDED??
         var sos = snapshot.val();
+        var sosKey = snapshot.key();
+        console.log("KEY: " + sosKey);
         var lat = sos.lat;
         var lon = sos.lon;
         var timestamp = sos.timestamp;
@@ -197,7 +200,7 @@ function plotSOS() {
         var name = sos.name;
         var lastname = sos.lastname;
         var fullname = name + " " + lastname;
-        placeSOSMarker(lat, lon, map, fullname, timestring, geocodeSOSAddress);
+        placeSOSMarker(lat, lon, map, fullname, timestring, sosKey, geocodeSOSAddress);
     });
 }
 
@@ -215,14 +218,18 @@ function toggleViewTrips() {
     }
 }
 
-function dismissSOS() {
+function dismissSOS(sosKey) {
+    var key = sosKey;
     //CONNECT TO FIREBASE
-//    var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/sos");
+    var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/sos");
+    console.log("connected to firebase");
     //PASS KEY INTO FIREBASE
-//    ref.orderByKey().on('child_added', function(snapshot) {
-//        if(ref.dismissed === false) {
-        //    dismiss = true;
-        //    sosMarkers.setMap(null);
-        //    sosMarkers = [];
-//    }
+    ref.orderByKey().equalTo(key).on("child_added", function(snapshot) {
+        var sos = snapshot.val(); //SET SNAPSHOT
+        console.log("got snapshot");
+        var dismissed = sos.dismissed;
+        console.log("dismissed: " + dismissed);
+        ref.push({ 'dismissed': dismissed });
+        console.log("done.");
+    });
 }
