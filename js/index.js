@@ -22,12 +22,10 @@ $(function() {
         buttons: {
             "Confirm": function() {
                 $( this ).dialog( "close" );
-                console.log("YES");
                 dismissSOS();
             },
             "Cancel": function() {
                 $( this ).dialog( "close" );
-                console.log("NO");
             }
         }
     });
@@ -220,7 +218,6 @@ function dismissSOS() {
 }
 
 function dialogDismissSOS() {
-    console.log("opening dialog");
     $("#dialogSOSDismiss").dialog("open");
 }
 
