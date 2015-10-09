@@ -27,8 +27,10 @@ $(function() {
         dialogClass: "dlg-no-close",
         buttons: {
             "Confirm": function() {
+                var sosKey = $( this ).data("key");
+                console.log("SOSKEY DIALOG: " + sosKey);
+                dismissSOS(sosKey);
                 $( this ).dialog( "close" );
-                dismissSOS();
             },
             "Cancel": function() {
                 $( this ).dialog( "close" );
@@ -52,8 +54,10 @@ function initMap() {
     });
 }
 
-function dialogDismissSOS() {
-    $("#dialogSOSDismiss").dialog("open");
+function dialogDismissSOS(sosKey) {
+    console.log("Im here!");
+    console.log("SOSKEY: " + sosKey);
+    $("#dialogSOSDismiss").data("key", sosKey).dialog("open");;
 }
 
 function geocodeTripAddress(geocoder, resultsMap, destination, name, leave, back, contact) {
@@ -121,6 +125,7 @@ function placeSOSMarker(lat, lon, map, fullname, timestring, sosKey){
     var sosLocation = ""; //set location to blank var before reverse geocode
     console.log(sosLocation);
     var sosKey = sosKey;
+    console.log("SOS KEY: " + sosKey);
     var lat = parseFloat(lat);
     console.log("lat: " + lat);
     var lon = parseFloat(lon);
@@ -140,12 +145,14 @@ function placeSOSMarker(lat, lon, map, fullname, timestring, sosKey){
             title: name + " : " + sosLocation,
             animation: google.maps.Animation.BOUNCE //BOUNCE, DROP
         });
+        console.log("SOS: " + sosKey);
         var contentString = '<h3><center>SOS Details</center></h3><hr>' + 
             '<p><b>Name: </b>' + name + '</p>' + 
-            '<p><b>Email: </b>' + "EMAIL" + '</p>' + 
+            '<p><b>Email: </b>' + 'EMAIL' + '</p>' + 
             '<p><b>Location: </b>' + sosLocation + '</p>' + 
             '<p><b>Raised: </b>' + sosDate + '</p>' + 
-            '<button class="buttonSOSDismiss"  type="button" onclick="dialogDismissSOS(' + sosKey + ')">Dismiss SOS</button>';
+            '<button class="buttonSOSDismiss" type="button" onclick="dialogDismissSOS(\''+ sosKey +'\')">Dismiss SOS</button>';
+        console.log("SOS AGAIN" + sosKey);
         sosMarker.info = new google.maps.InfoWindow({
             content: contentString,
         });
@@ -227,16 +234,17 @@ function toggleViewTrips() {
 function dismissSOS(sosKey) {
     console.log("dismissSOS()");
     var key = sosKey;
+    console.log("KEY: " + key);
     //CONNECT TO FIREBASE
     var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/sos");
     console.log("connected to firebase");
     //PASS KEY INTO FIREBASE
-    ref.orderByKey().equalTo(key).on("child_added", function(snapshot) {
-        var sos = snapshot.val(); //SET SNAPSHOT
-        console.log("got snapshot");
-        var dismissed = sos.dismissed;
-        console.log("dismissed: " + dismissed);
-        ref.push({ 'dismissed': dismissed });
-        console.log("done.");
-    });
+//    ref.orderByKey().equalTo(key).on("child_added", function(snapshot) {
+//        var sos = snapshot.val(); //SET SNAPSHOT
+//        console.log("got snapshot");
+//        var dismissed = sos.dismissed;
+//        console.log("dismissed: " + dismissed);
+//        ref.push({ 'dismissed': dismissed });
+//        console.log("done.");
+//    });
 }
