@@ -236,15 +236,11 @@ function dismissSOS(sosKey) {
     var key = sosKey;
     console.log("KEY: " + key);
     //CONNECT TO FIREBASE
-    var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/sos");
+    var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/sos/" + key);
     console.log("connected to firebase");
     //PASS KEY INTO FIREBASE
-//    ref.orderByKey().equalTo(key).on("child_added", function(snapshot) {
-//        var sos = snapshot.val(); //SET SNAPSHOT
-//        console.log("got snapshot");
-//        var dismissed = sos.dismissed;
-//        console.log("dismissed: " + dismissed);
-//        ref.push({ 'dismissed': dismissed });
-//        console.log("done.");
-//    });
+    ref.on("child_added", function(snapshot) {
+        ref.update({ dismissed: "true" });
+        console.log("done.");
+    });
 }
