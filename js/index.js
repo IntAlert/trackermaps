@@ -5,7 +5,7 @@ $(function() {
         open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog | ui).hide(); },
         draggable: false,
         resizable: false,
-        autoOpen: true,
+        autoOpen: false,
         width: 400,
         modal: true,
         buttons: {
@@ -57,7 +57,7 @@ function initMap() {
 function dialogDismissSOS(sosKey) {
     console.log("Im here!");
     console.log("SOSKEY: " + sosKey);
-    $("#dialogSOSDismiss").data("key", sosKey).dialog("open");;
+    $("#dialogSOSDismiss").data("key", sosKey).dialog("open");
 }
 
 function geocodeTripAddress(geocoder, resultsMap, destination, name, leave, back, contact) {
@@ -201,19 +201,21 @@ function plotSOS() {
     //retrieve sos snapshot
     //IF DISMISSED IS TRUE, IGNORE THAT RECORD
     ref.on('child_added', function(snapshot){
-        var geocoder = new google.maps.Geocoder(); //NEEDED??
+        //IF STATEMENT GOES HERE
         var sos = snapshot.val();
         var sosKey = snapshot.key();
-        console.log("KEY: " + sosKey);
-        var lat = sos.lat;
-        var lon = sos.lon;
-        var timestamp = sos.timestamp;
-        var timestampconverted = new Date(timestamp * 1000);
-        var timestring = timestampconverted.toGMTString();
-        var name = sos.name;
-        var lastname = sos.lastname;
-        var fullname = name + " " + lastname;
-        placeSOSMarker(lat, lon, map, fullname, timestring, sosKey, geocodeSOSAddress);
+        if (sos.dismissed == "false") {
+            var geocoder = new google.maps.Geocoder(); //NEEDED??
+            var lat = sos.lat;
+            var lon = sos.lon;
+            var timestamp = sos.timestamp;
+            var timestampconverted = new Date(timestamp * 1000);
+            var timestring = timestampconverted.toGMTString();
+            var name = sos.name;
+            var lastname = sos.lastname;
+            var fullname = name + " " + lastname;
+            placeSOSMarker(lat, lon, map, fullname, timestring, sosKey, geocodeSOSAddress);
+        };
     });
 }
 
@@ -242,5 +244,6 @@ function dismissSOS(sosKey) {
     ref.on("child_added", function(snapshot) {
         ref.update({ dismissed: "true" });
         console.log("done.");
+        location.reload();
     });
 }
