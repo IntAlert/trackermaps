@@ -12,6 +12,7 @@ $(function() {
             resizable: false,
             autoOpen: true,
             width: 400,
+            dialogClass: "dialogInverse",
             modal: true,
             buttons: {
                 "Login": function() {
