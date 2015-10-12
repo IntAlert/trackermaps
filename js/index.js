@@ -1,21 +1,27 @@
 ////////// DIALOG \\\\\\\\\\
 $(function() {
-    $( "#dialogLogin" ).dialog({
-        closeOnEscape: false,
-        open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog | ui).hide(); },
-        draggable: false,
-        resizable: false,
-        autoOpen: false,
-        width: 400,
-        modal: true,
-        buttons: {
-            "Login": function() {
-                var username = document.loginform.username.value;
-                var password = document.loginform.password.value;
-                login(username, password);
+    var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/");
+    var authData = ref.getAuth();
+    console.log("authed " + authData);
+    if (authData == null) {
+        console.log("inside if");
+        $( "#dialogLogin" ).dialog({
+            closeOnEscape: false,
+            open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog | ui).hide(); },
+            draggable: false,
+            resizable: false,
+            autoOpen: true,
+            width: 400,
+            modal: true,
+            buttons: {
+                "Login": function() {
+                    var username = document.loginform.username.value;
+                    var password = document.loginform.password.value;
+                    login(username, password);
+                }
             }
-        }
-    });
+        });
+    }
 });
 
 $(function() {
@@ -192,6 +198,7 @@ function plotTrips() {
 //        tripInfo(name, destination, leave, back, contact);
         //feed countries into geocoder
         geocodeTripAddress(geocoder, map, destination, name, leave, back, contact);
+        document.getElementById("checkbox").disabled = false;
     });
 }
 
@@ -246,4 +253,11 @@ function dismissSOS(sosKey) {
         console.log("done.");
         location.reload();
     });
+}
+
+function logout() {
+    //LOGOUT
+    console.log("LOGGING OUT");
+    ref.unauth();
+    location.reload();
 }
