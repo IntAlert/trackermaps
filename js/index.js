@@ -195,9 +195,18 @@ function plotTrips() {
         var leave = trip.leave;
         var back = trip.back;
         var contact = trip.contactlastname;
-        //generate info popup
-//        tripInfo(name, destination, leave, back, contact);
-        //feed countries into geocoder
+        //CHECK IF DATE IS VALID (TODAY OR LATER)
+        var today = new Date(); //GET TODAY
+        var todayyear = today.getFullYear();
+        var todaymonth = today.getMonth();
+        var todayday = today.getDate();
+        var todayformatted = todayday + "/" + todaymonth + "/" + todayyear;
+        console.log("LEAVE: " + leave);
+        console.log("YEAR: " + todayyear);
+        console.log("MONTH: " + todaymonth);
+        console.log("DAY: " + todayday);
+        console.log("FORMATTED: " + todayformatted);
+        
         geocodeTripAddress(geocoder, map, destination, name, leave, back, contact);
         document.getElementById("checkbox").disabled = false;
     });
