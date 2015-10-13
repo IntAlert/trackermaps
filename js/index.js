@@ -198,6 +198,7 @@ function plotTrips() {
         //CHECK IF DATE IS VALID (TODAY OR LATER)
         //GET TODAY
         var today = new Date();
+//        var todayutc = new Date(Date.UTC(today)); //CONVERT TO UTC
         today.setHours(0);
         today.setMinutes(0);
         today.setSeconds(0);
@@ -209,12 +210,20 @@ function plotTrips() {
         var leaveyear = leavesplit[2];
         var leavemonth = leavesplit[1];
         var leaveday = leavesplit[0];
+        var leaveformatted = new Date(leaveyear, leavemonth-1, leaveday);
         //SET DATE AS UTC FROM VARS
-        var leaveobject = new Date(leaveyear, leavemonth, leaveday);
-        console.log("LEAVE OBJECT " + leaveobject);
+//        var leaveutc = new Date(Date.UTC(leaveyear, leavemonth, leaveday));
+//        var leaveutc = new Date(Date.UTC(leaveobject));
+        console.log("LEAVE OBJECT " + leaveformatted);
         console.log("TODAY " + today);
-        
-        
+        if (leaveformatted >= today) {
+            console.log("WILL BE SHOWN");
+            geocodeTripAddress(geocoder, map, destination, name, leave, back, contact);
+            document.getElementById("checkbox").disabled = false;
+        } else {
+            console.log("WILL NOT BE SHOWN");
+        }
+        //CONVERTING DATES TO UTC
 //        var todayyear = today.getFullYear();
 //        var todaymonth = today.getMonth();
 //        var todayday = today.getDate();
@@ -224,9 +233,8 @@ function plotTrips() {
 //        console.log("MONTH: " + todaymonth);
 //        console.log("DAY: " + todayday);
 //        console.log("FORMATTED: " + todayformatted);
-        
-        geocodeTripAddress(geocoder, map, destination, name, leave, back, contact);
-        document.getElementById("checkbox").disabled = false;
+//        geocodeTripAddress(geocoder, map, destination, name, leave, back, contact);
+//        document.getElementById("checkbox").disabled = false;
     });
 }
 
