@@ -196,16 +196,20 @@ function plotTrips() {
         var back = trip.back;
         var contact = trip.contactlastname;
         //CHECK IF DATE IS VALID (TODAY OR LATER)
-        var today = new Date(); //GET TODAY
+        //GET TODAY
+        var today = new Date();
         today.setHours(0);
         today.setMinutes(0);
         today.setSeconds(0);
         today.setMilliseconds(0);
-        var leavesplit = leave.split("/"); //SPLIT
+        //SPLIT INTO ARRAY
+        var leavesplit = leave.split("/");
         console.log(leavesplit);
+        //SET ARRAY INTO VARS
         var leaveyear = leavesplit[2];
         var leavemonth = leavesplit[1];
         var leaveday = leavesplit[0];
+        //SET DATE AS UTC FROM VARS
         var leaveobject = new Date(leaveyear, leavemonth, leaveday);
         console.log("LEAVE OBJECT " + leaveobject);
         console.log("TODAY " + today);
