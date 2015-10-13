@@ -204,19 +204,19 @@ function plotTrips() {
         today.setSeconds(0);
         today.setMilliseconds(0);
         //SPLIT INTO ARRAY
-        var leavesplit = leave.split("/");
-        console.log(leavesplit);
+        var backsplit = back.split("/");
+        console.log(backsplit);
         //SET ARRAY INTO VARS
-        var leaveyear = leavesplit[2];
-        var leavemonth = leavesplit[1];
-        var leaveday = leavesplit[0];
-        var leaveformatted = new Date(leaveyear, leavemonth-1, leaveday);
+        var backyear = backsplit[2];
+        var backmonth = backsplit[1];
+        var backday = backsplit[0];
+        var backformatted = new Date(backyear, backmonth-1, backday);
         //SET DATE AS UTC FROM VARS
 //        var leaveutc = new Date(Date.UTC(leaveyear, leavemonth, leaveday));
 //        var leaveutc = new Date(Date.UTC(leaveobject));
-        console.log("LEAVE OBJECT " + leaveformatted);
+        console.log("LEAVE OBJECT " + backformatted);
         console.log("TODAY " + today);
-        if (leaveformatted >= today) {
+        if (backformatted >= today) {
             console.log("WILL BE SHOWN");
             geocodeTripAddress(geocoder, map, destination, name, leave, back, contact);
             document.getElementById("checkbox").disabled = false;
