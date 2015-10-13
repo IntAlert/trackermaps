@@ -197,15 +197,29 @@ function plotTrips() {
         var contact = trip.contactlastname;
         //CHECK IF DATE IS VALID (TODAY OR LATER)
         var today = new Date(); //GET TODAY
-        var todayyear = today.getFullYear();
-        var todaymonth = today.getMonth();
-        var todayday = today.getDate();
-        var todayformatted = todayday + "/" + todaymonth + "/" + todayyear;
-        console.log("LEAVE: " + leave);
-        console.log("YEAR: " + todayyear);
-        console.log("MONTH: " + todaymonth);
-        console.log("DAY: " + todayday);
-        console.log("FORMATTED: " + todayformatted);
+        today.setHours(0);
+        today.setMinutes(0);
+        today.setSeconds(0);
+        today.setMilliseconds(0);
+        var leavesplit = leave.split("/"); //SPLIT
+        console.log(leavesplit);
+        var leaveyear = leavesplit[2];
+        var leavemonth = leavesplit[1];
+        var leaveday = leavesplit[0];
+        var leaveobject = new Date(leaveyear, leavemonth, leaveday);
+        console.log("LEAVE OBJECT " + leaveobject);
+        console.log("TODAY " + today);
+        
+        
+//        var todayyear = today.getFullYear();
+//        var todaymonth = today.getMonth();
+//        var todayday = today.getDate();
+//        var todayformatted = todayday + "/" + todaymonth + "/" + todayyear;
+//        console.log("LEAVE: " + leave);
+//        console.log("YEAR: " + todayyear);
+//        console.log("MONTH: " + todaymonth);
+//        console.log("DAY: " + todayday);
+//        console.log("FORMATTED: " + todayformatted);
         
         geocodeTripAddress(geocoder, map, destination, name, leave, back, contact);
         document.getElementById("checkbox").disabled = false;
