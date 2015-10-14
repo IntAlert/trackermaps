@@ -45,3 +45,11 @@ html, body {
 .dialogInverse .ui-dialog-titlebar {
     color: #9d9d9d;
 }
+
+.sosInfoWindow {
+    color: #333;
+}
+
+.hideTripsButton {
+    margin-left: 10px;
+}

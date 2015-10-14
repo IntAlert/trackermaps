@@ -144,11 +144,14 @@ function placeSOSMarker(lat, lon, map, fullname, timestring, sosKey){
             title: name + " : " + sosLocation,
             animation: google.maps.Animation.BOUNCE //BOUNCE, DROP
         });
-        var contentString = '<h3><center>SOS Details</center></h3><hr>' + 
+        var contentString = 
+            '<div class="sosInfoWindow">' +
+            '<h3><center>SOS Details</center></h3><hr>' + 
             '<p><b>Name: </b>' + name + '</p>' + 
             '<p><b>Location: </b>' + sosLocation + '</p>' + 
             '<p><b>Raised: </b>' + sosDate + '</p>' + 
-            '<button class="buttonSOSDismiss" type="button" onclick="dialogDismissSOS(\''+ sosKey +'\')">Dismiss SOS</button>';
+            '<button class="buttonSOSDismiss" type="button" onclick="dialogDismissSOS(\''+ sosKey +'\')">Dismiss SOS</button>' +
+            '</div>';
         sosMarker.info = new google.maps.InfoWindow({
             content: contentString,
         });
