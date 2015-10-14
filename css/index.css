@@ -53,3 +53,9 @@ html, body {
 .hideTripsButton {
     margin-left: 10px;
 }
+
+.navbarLogo {
+    height: 25px;
+    width: 25px;
+    margin-right: 10px;
+}
