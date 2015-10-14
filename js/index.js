@@ -4,7 +4,6 @@ $(function() {
     var authData = ref.getAuth();
     console.log("authed " + authData);
     if (authData == null) {
-        console.log("inside if");
         $( "#dialogLogin" ).dialog({
             closeOnEscape: false,
             open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog | ui).hide(); },
@@ -36,7 +35,6 @@ $(function() {
             "Confirm": function() {
                 var sosKey = $( this ).data("key");
                 console.log("SOSKEY DIALOG: " + sosKey);
-                dismissSOS(sosKey);
                 $( this ).dialog( "close" );
             },
             "Cancel": function() {
@@ -62,7 +60,6 @@ function initMap() {
 }
 
 function dialogDismissSOS(sosKey) {
-    console.log("Im here!");
     console.log("SOSKEY: " + sosKey);
     $("#dialogSOSDismiss").data("key", sosKey).dialog("open");
 }
@@ -117,7 +114,6 @@ function geocodeSOSAddress(geocoder, map, coords, callback) {
             console.log(google.maps.GeocoderStatus.OK);
             if (results[1]) {
                 sosLocation = results[1].formatted_address;
-                console.log("Location: " + sosLocation);
                 callback(sosLocation);
             } else {
                 window.alert("No results found.");
@@ -130,13 +126,9 @@ function geocodeSOSAddress(geocoder, map, coords, callback) {
 
 function placeSOSMarker(lat, lon, map, fullname, timestring, sosKey){
     var sosLocation = ""; //set location to blank var before reverse geocode
-    console.log(sosLocation);
     var sosKey = sosKey;
-    console.log("SOS KEY: " + sosKey);
     var lat = parseFloat(lat);
-    console.log("lat: " + lat);
     var lon = parseFloat(lon);
-    console.log("lon: " + lon);
     var coords = {lat: lat, lng: lon};
     var name = fullname;
     var sosDate = timestring;
@@ -152,14 +144,11 @@ function placeSOSMarker(lat, lon, map, fullname, timestring, sosKey){
             title: name + " : " + sosLocation,
             animation: google.maps.Animation.BOUNCE //BOUNCE, DROP
         });
-        console.log("SOS: " + sosKey);
         var contentString = '<h3><center>SOS Details</center></h3><hr>' + 
             '<p><b>Name: </b>' + name + '</p>' + 
-            '<p><b>Email: </b>' + 'EMAIL' + '</p>' + 
             '<p><b>Location: </b>' + sosLocation + '</p>' + 
             '<p><b>Raised: </b>' + sosDate + '</p>' + 
             '<button class="buttonSOSDismiss" type="button" onclick="dialogDismissSOS(\''+ sosKey +'\')">Dismiss SOS</button>';
-        console.log("SOS AGAIN" + sosKey);
         sosMarker.info = new google.maps.InfoWindow({
             content: contentString,
         });
@@ -205,7 +194,6 @@ function plotTrips() {
         today.setMilliseconds(0);
         //SPLIT INTO ARRAY
         var backsplit = back.split("/");
-        console.log(backsplit);
         //SET ARRAY INTO VARS
         var backyear = backsplit[2];
         var backmonth = backsplit[1];
@@ -214,8 +202,6 @@ function plotTrips() {
         //SET DATE AS UTC FROM VARS
 //        var leaveutc = new Date(Date.UTC(leaveyear, leavemonth, leaveday));
 //        var leaveutc = new Date(Date.UTC(leaveobject));
-        console.log("LEAVE OBJECT " + backformatted);
-        console.log("TODAY " + today);
         if (backformatted >= today) {
             console.log("WILL BE SHOWN");
             geocodeTripAddress(geocoder, map, destination, name, leave, back, contact);
@@ -258,7 +244,7 @@ function plotSOS() {
             var lastname = sos.lastname;
             var fullname = name + " " + lastname;
             placeSOSMarker(lat, lon, map, fullname, timestring, sosKey, geocodeSOSAddress);
-        };
+        }
     });
 }
 
@@ -268,7 +254,7 @@ function toggleViewTrips() {
         console.log("Trips disabled");
         for(i=0; i<tripMarkers.length; i++){
         tripMarkers[i].setMap(null);
-        };
+        }
     } else {
         viewTrips = true;
         plotTrips();
@@ -282,11 +268,9 @@ function dismissSOS(sosKey) {
     console.log("KEY: " + key);
     //CONNECT TO FIREBASE
     var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/sos/" + key);
-    console.log("connected to firebase");
     //PASS KEY INTO FIREBASE
     ref.on("child_added", function(snapshot) {
         ref.update({ dismissed: "true" });
-        console.log("done.");
         location.reload();
     });
 }

@@ -9,12 +9,12 @@ html, body {
 }
 
 .navbar-center {
-    position: absolute;
-    width: 100%;
     left: 0;
-    text-align: center;
     margin: auto;
     padding-top: 13px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
 }
 
 .showtrips {
@@ -30,8 +30,8 @@ html, body {
 }
 
 .buttonSOSDismiss {
-    margin: 0 auto;
     display: block;
+    margin: 0 auto;
 }
 
 .loginText {
