@@ -17,7 +17,7 @@
         <script src='js/login.js'></script>
     </head>
     <body>
-        <!--JQUERY UI DIALOG-->
+        <!--JQUERY UI DIALOG AND BOOTSTRAP ALERTS-->
         <div id="dialogLogin" class="dialogInverse" title="Login">
             <form name="loginform">
                 <fieldset>
@@ -41,21 +41,20 @@
                         <span><img class="navbarLogo" alt="Alert Security App Map" src="resources/images/Alert9696.png"></span>Alert Travel Map
                     </a>
                 </div>
-                <div id="navbar" class="navbar-collapse collapse">
+                <div>
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.html">Home</a></li>
                         <li><a href="about.html">About</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="navbarLogo" src="resources/images/Alert9696.png"></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Toggle Trips</a></li>
-<!--
-                                <li class="showtripslabel"><a href="#"><label class="showtripslabeltext" for="checkbox">Hide Trips</label></a></li>
-                                <li><input id="checkbox" type="checkbox" onclick="toggleViewTrips()" disabled="true"></li>
-                                <li><button class="hideTripsButton" type="button" onclick="logout()">Logout</button></li>
--->
+                                <li class="dropdown-header">Settings</li>
+                                <li><a id="tripsToggle" href="#" onclick="toggleViewTrips()">Disable Trips</a></li>
+                                <li><a href="https://github.com/IntAlert/trackermaps" target="_blank">Help</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#" onclick="logout()">Logout</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -66,7 +65,7 @@
         <div class="navbar navbar-inverse navbar-fixed-bottom">
             <div class="container">
                 <span class="navbar-text navbar-center">© International Alert</span>
-                <span class="navbar-text navbar-right"><a href="#">https://github.com/IntAlert/trackermaps</a></span>
+                <span class="navbar-text navbar-right">Version: <script>document.write(version)</script></span>
             </div>
         </div>
     </body>

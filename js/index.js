@@ -1,3 +1,5 @@
+var version = "Dev";
+
 ////////// DIALOG \\\\\\\\\\
 $(function() {
     var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/");
@@ -49,8 +51,9 @@ var map;
 var viewTrips = true;
 var tripMarkers = []; //CREATES ARRAY FOR TRIP MARKERS
 var sosMarkers = []; //CREATES ARRAY FOR SOS MARKERS
+var tripsToggle = "Disable";
 
-function initMap() {    
+function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 0, lng: 0}, //needs a value
         zoom: 2, //zoom level (0-20)
@@ -254,12 +257,16 @@ function plotSOS() {
 function toggleViewTrips() {
     if(viewTrips == true) {
         viewTrips = false;
+        tripsToggle = "Enable";
+        document.getElementById("tripsToggle").innerHTML = tripsToggle + " Trips";
         console.log("Trips disabled");
         for(i=0; i<tripMarkers.length; i++){
         tripMarkers[i].setMap(null);
         }
     } else {
         viewTrips = true;
+        tripsToggle = "Disable";
+        document.getElementById("tripsToggle").innerHTML = tripsToggle + " Trips";
         plotTrips();
         console.log("Trips enabled");
     }
