@@ -36,6 +36,7 @@ html, body {
 
 .loginText {
     float: left;
+    color: #9d9d9d;
 }
 
 .loginField {
@@ -62,4 +63,30 @@ html, body {
 
 .dropdown-menu {
     background-color: #333;
+}
+
+.dropdown-menu>li>a {
+    color: #9d9d9d;
+}
+
+.dropdown-menu .divider {
+    background-color: #777;
+}
+
+.dialogInverse .ui-widget-header {
+    background: #333;
+}
+
+.dialogInverse .ui-widget-content {
+/*    background: #333;*/
+    color: #9d9d9d;
+}
+
+.ui-widget-content {
+/*    background: red;*/
+}
+
+.dialogInverse .ui-widget-content .ui-state-default {
+    background: #9d9d9d;
+    color: #333;
 }
