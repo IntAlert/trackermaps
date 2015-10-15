@@ -12,7 +12,7 @@ $(function() {
             draggable: false,
             resizable: false,
             autoOpen: true,
-            width: 400,
+            width: 450,
             dialogClass: "dialogInverse",
             modal: true,
             buttons: {
@@ -32,7 +32,7 @@ $(function() {
         resizable: false,
         autoOpen: false,
         modal: true,
-        dialogClass: "dlg-no-close",
+        dialogClass: "dialogInverse dlg-no-close",
         buttons: {
             "Confirm": function() {
                 var sosKey = $( this ).data("key");
